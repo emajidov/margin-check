@@ -1,0 +1,1 @@
+INSERT INTO public.issues (id, description, bank_id, account_id, created_at, previous_margin, current_margin, ci050_id, cc050_id) VALUES (1, 'Transactions doesnt match', 2, 3, '2024-05-28 22:57:31.581613', 8766.4, 821.4, 17, 6);

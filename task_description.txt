@@ -1,0 +1,86 @@
+Specific example
+----------------
+
+The two excerpts below are schematic representations of the respective report tables.
+For the specific example, suppose the checks are run on 2020-05-12 at 10am.
+
+The checks shall do the following:
+
+    1. Check, if the end-of-day values of the previous day are the same as the first intraday values.
+       Specifically, all entries the CC050 of the previous day (here 2020-05-11) must be present in the
+       first CI050 (meaning: having minimum "time of day" value) and vice versa.
+       e.g. the last four columns of row 33 in the present file
+            ['2020-05-11', 'Bank 1', 'A1', 'SPAN', 3212.2]
+       must equal the last four columns of row 68
+            ['2020-05-12', '08:00:00', 'Bank 1', 'A1', 'SPAN', 3212.2]
+       There must not be any additional values in one of the reports compared to the other and the margin
+       values shall be identical.
+    2. Check, if the end-of-day values are the same as the last intraday values.
+       e.g. the last four columns of row 33 in the present file
+            ['2020-05-11', 'Bank 1', 'A1', 'SPAN', 3212.2]
+       must equal the last four columns of row 58
+            ['2020-05-11', '19:00:00', 'Bank 1', 'A1', 'SPAN', 3212.2]
+
+
+Schematic reports
+-----------------
+
+schematic excerpt of CC050 table
+[
+    ...
+    # [date, clearing member, account, margin type, margin]
+    # end-of-day report of 2020-05-11 in CC050 table
+    ['2020-05-11', 'Bank 1', 'A1', 'SPAN', 3212.2],
+    ['2020-05-11', 'Bank 1', 'A1', 'IMSM', 837.1],
+    ...
+    ['2020-05-11', 'Bank 1', 'A2', 'SPAN', 8963.3],
+    ['2020-05-11', 'Bank 1', 'A2', 'IMSM', 76687.9],
+    ...
+    ['2020-05-11', 'Bank 2', 'A1', 'SPAN', 821.4],
+    ['2020-05-11', 'Bank 2', 'A1', 'SPAN', 8766.4],
+    ...
+]
+
+schematic excerpt of CI050 table
+[
+    ...
+    # [date, time of day, clearing member, account, margin type, margin]
+    ['2020-05-11', '18:00:00', 'Bank 1', 'A1', 'SPAN', 2882.2],
+    ['2020-05-11', '18:00:00', 'Bank 1', 'A1', 'IMSM', 988.1],
+    ...
+    ['2020-05-11', '18:00:00', 'Bank 1', 'A2', 'SPAN', 788.3],
+    ['2020-05-11', '18:00:00', 'Bank 1', 'A2', 'IMSM', 908.9],
+    ...
+    ['2020-05-11', '18:00:00', 'Bank 2', 'A1', 'SPAN', 123.4],
+    ['2020-05-11', '18:00:00', 'Bank 2', 'A1', 'IMSM', 8326.4],
+    ...
+    # "last" intraday report of 2020-05-11 in CI050 table
+    ['2020-05-11', '19:00:00', 'Bank 1', 'A1', 'SPAN', 3212.2],
+    ['2020-05-11', '19:00:00', 'Bank 1', 'A1', 'IMSM', 837.1],
+    ...
+    ['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'SPAN', 8963.3],
+    ['2020-05-11', '19:00:00', 'Bank 1', 'A2', 'IMSM', 76687.9],
+    ...
+    ['2020-05-11', '19:00:00', 'Bank 2', 'A1', 'SPAN', 821.4],
+    ['2020-05-11', '19:00:00', 'Bank 2', 'A1', 'IMSM', 8766.4],
+    ...
+    # "first" intraday report of 2020-05-12 in CI050 table
+    ['2020-05-12', '08:00:00', 'Bank 1', 'A1', 'SPAN', 3212.2],
+    ['2020-05-12', '08:00:00', 'Bank 1', 'A1', 'IMSM', 837.1],
+    ...
+    ['2020-05-12', '08:00:00', 'Bank 1', 'A2', 'SPAN', 8963.3],
+    ['2020-05-12', '08:00:00', 'Bank 1', 'A2', 'IMSM', 76687.9],
+    ...
+    ['2020-05-12', '08:00:00', 'Bank 2', 'A1', 'SPAN', 821.4],
+    ['2020-05-12', '08:00:00', 'Bank 2', 'A1', 'IMSM', 8766.4],
+    ...
+    # "second" intraday report of 2020-05-12 in CI050 table
+    ['2020-05-12', '09:00:00', 'Bank 1', 'A1', 'SPAN', 3133.9],
+    ['2020-05-12', '09:00:00', 'Bank 1', 'A1', 'IMSM', 137.1],
+    ...
+    ['2020-05-12', '09:00:00', 'Bank 1', 'A2', 'SPAN', 2963.3],
+    ['2020-05-12', '09:00:00', 'Bank 1', 'A2', 'IMSM', 74687.9],
+    ...
+    ['2020-05-12', '09:00:00', 'Bank 2', 'A1', 'SPAN', 811.4],
+    ['2020-05-12', '09:00:00', 'Bank 2', 'A1', 'IMSM', 8366.4],
+]
